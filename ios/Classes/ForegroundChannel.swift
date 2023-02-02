@@ -93,6 +93,7 @@ public class ForegroundChannel : NSObject {
     
     private func startTracking(_ result: @escaping FlutterResult) {
         locationManager.startUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
         isTracking = true
         SharedPrefsUtil.saveIsTracking(isTracking)
         result(true)
@@ -100,6 +101,7 @@ public class ForegroundChannel : NSObject {
     
     private func stopTracking(_ result: @escaping FlutterResult) {
         locationManager.stopUpdatingLocation()
+        locationManager.stopMonitoringSignificantLocationChanges()
         isTracking = false
         SharedPrefsUtil.saveIsTracking(isTracking)
         result(true)
