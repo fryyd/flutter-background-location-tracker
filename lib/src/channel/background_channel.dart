@@ -42,8 +42,11 @@ class BackgroundChannel {
     final horizontalAccuracy =
         data['horizontal_accuracy'] as double; // ignore: avoid_as
     final course = data['course'] as double; // ignore: avoid_as
+
+    // courseAccuracy changed type in 13.4, needs to be handles differently
     final courseAccuracy =
-        data['course_accuracy'] as double; // ignore: avoid_as
+        double.tryParse(data['course_accuracy'].toString()) ?? 0.0;
+
     final speed = data['speed'] as double; // ignore: avoid_as
     final speedAccuracy = data['speed_accuracy'] as double; // ignore: avoid_as
     await callback(BackgroundLocationUpdateData(
